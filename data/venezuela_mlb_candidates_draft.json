@@ -1,0 +1,482 @@
+[
+  {
+    "name": "Ronald Acuna Jr.",
+    "team": "ATL",
+    "role": "batter",
+    "subrole": null,
+    "must_track": true,
+    "wbc_2026": true,
+    "confidence": "high",
+    "notes": "Protected WBC subset."
+  },
+  {
+    "name": "Jose Altuve",
+    "team": "HOU",
+    "role": "batter",
+    "subrole": null,
+    "must_track": true,
+    "wbc_2026": false,
+    "confidence": "high",
+    "notes": "High-priority broader-universe player; explicitly reported by MLB.com in 2026 Astros coverage."
+  },
+  {
+    "name": "Luis Arraez",
+    "team": "SF",
+    "role": "batter",
+    "subrole": null,
+    "must_track": true,
+    "wbc_2026": true,
+    "confidence": "high",
+    "notes": "Protected WBC subset."
+  },
+  {
+    "name": "Anthony Santander",
+    "team": "TOR",
+    "role": "batter",
+    "subrole": null,
+    "must_track": true,
+    "wbc_2026": false,
+    "confidence": "high",
+    "notes": "High-priority broader-universe player; MLB.com Blue Jays coverage confirms Toronto in 2026."
+  },
+  {
+    "name": "Gleyber Torres",
+    "team": "DET",
+    "role": "batter",
+    "subrole": null,
+    "must_track": true,
+    "wbc_2026": true,
+    "confidence": "high",
+    "notes": "Protected WBC subset."
+  },
+  {
+    "name": "Eugenio Suarez",
+    "team": "CIN",
+    "role": "batter",
+    "subrole": null,
+    "must_track": true,
+    "wbc_2026": true,
+    "confidence": "medium",
+    "notes": "Included from MLB WBC roster coverage; verify current club during final curation."
+  },
+  {
+    "name": "Salvador Perez",
+    "team": "KC",
+    "role": "batter",
+    "subrole": null,
+    "must_track": true,
+    "wbc_2026": true,
+    "confidence": "high",
+    "notes": "Protected WBC subset."
+  },
+  {
+    "name": "William Contreras",
+    "team": "MIL",
+    "role": "batter",
+    "subrole": null,
+    "must_track": true,
+    "wbc_2026": true,
+    "confidence": "high",
+    "notes": "Protected WBC subset."
+  },
+  {
+    "name": "Willson Contreras",
+    "team": "BOS",
+    "role": "batter",
+    "subrole": null,
+    "must_track": true,
+    "wbc_2026": true,
+    "confidence": "medium",
+    "notes": "Included from MLB WBC roster coverage; verify current club during final curation."
+  },
+  {
+    "name": "Maikel Garcia",
+    "team": "KC",
+    "role": "batter",
+    "subrole": null,
+    "must_track": true,
+    "wbc_2026": true,
+    "confidence": "high",
+    "notes": "Protected WBC subset."
+  },
+  {
+    "name": "Andres Gimenez",
+    "team": null,
+    "role": "batter",
+    "subrole": null,
+    "must_track": true,
+    "wbc_2026": false,
+    "confidence": "medium",
+    "notes": "High-priority Venezuelan MLB player; verify 2026 club in final curation."
+  },
+  {
+    "name": "Jackson Chourio",
+    "team": "MIL",
+    "role": "batter",
+    "subrole": null,
+    "must_track": true,
+    "wbc_2026": true,
+    "confidence": "high",
+    "notes": "Protected WBC subset."
+  },
+  {
+    "name": "Wilyer Abreu",
+    "team": "BOS",
+    "role": "batter",
+    "subrole": null,
+    "must_track": true,
+    "wbc_2026": true,
+    "confidence": "high",
+    "notes": "Protected WBC subset."
+  },
+  {
+    "name": "Ezequiel Tovar",
+    "team": "COL",
+    "role": "batter",
+    "subrole": null,
+    "must_track": true,
+    "wbc_2026": true,
+    "confidence": "high",
+    "notes": "Protected WBC subset."
+  },
+  {
+    "name": "Javier Sanoja",
+    "team": "MIA",
+    "role": "batter",
+    "subrole": null,
+    "must_track": true,
+    "wbc_2026": true,
+    "confidence": "high",
+    "notes": "Protected WBC subset."
+  },
+  {
+    "name": "Francisco Alvarez",
+    "team": "NYM",
+    "role": "batter",
+    "subrole": null,
+    "must_track": true,
+    "wbc_2026": false,
+    "confidence": "high",
+    "notes": "Broader-universe catcher; MLB.com Mets coverage shows him as a core 2026 big-league piece."
+  },
+  {
+    "name": "Gabriel Moreno",
+    "team": "AZ",
+    "role": "batter",
+    "subrole": null,
+    "must_track": true,
+    "wbc_2026": false,
+    "confidence": "high",
+    "notes": "Broader-universe catcher; MLB player page lists him as Venezuelan and active with Arizona."
+  },
+  {
+    "name": "Wilmer Flores",
+    "team": "SF",
+    "role": "batter",
+    "subrole": null,
+    "must_track": false,
+    "wbc_2026": false,
+    "confidence": "medium",
+    "notes": "Candidate veteran broader-universe player; verify active MLB status."
+  },
+  {
+    "name": "Luisangel Acuna",
+    "team": "NYM",
+    "role": "batter",
+    "subrole": null,
+    "must_track": false,
+    "wbc_2026": false,
+    "confidence": "medium",
+    "notes": "Candidate young MLB player; verify 2026 major-league role."
+  },
+  {
+    "name": "Leo Rivas",
+    "team": "SEA",
+    "role": "batter",
+    "subrole": null,
+    "must_track": false,
+    "wbc_2026": false,
+    "confidence": "high",
+    "notes": "Broader-universe infielder; MLB Mariners coverage and player page identify him as Venezuelan."
+  },
+  {
+    "name": "Luis Matos",
+    "team": "SF",
+    "role": "batter",
+    "subrole": null,
+    "must_track": false,
+    "wbc_2026": false,
+    "confidence": "medium",
+    "notes": "Candidate broader-universe outfielder; verify active MLB role."
+  },
+  {
+    "name": "Oswald Peraza",
+    "team": "NYY",
+    "role": "batter",
+    "subrole": null,
+    "must_track": false,
+    "wbc_2026": false,
+    "confidence": "medium",
+    "notes": "Candidate broader-universe infielder; verify 2026 MLB role."
+  },
+  {
+    "name": "Oswaldo Cabrera",
+    "team": "NYY",
+    "role": "batter",
+    "subrole": null,
+    "must_track": false,
+    "wbc_2026": false,
+    "confidence": "medium",
+    "notes": "Candidate broader-universe utility player; verify 2026 MLB role."
+  },
+  {
+    "name": "Orlando Arcia",
+    "team": null,
+    "role": "batter",
+    "subrole": null,
+    "must_track": false,
+    "wbc_2026": false,
+    "confidence": "low",
+    "notes": "Candidate veteran infielder; verify 2026 MLB status and club."
+  },
+  {
+    "name": "Ildemaro Vargas",
+    "team": null,
+    "role": "batter",
+    "subrole": null,
+    "must_track": false,
+    "wbc_2026": false,
+    "confidence": "low",
+    "notes": "Candidate utility infielder; verify 2026 MLB status and club."
+  },
+  {
+    "name": "Pablo Lopez",
+    "team": "MIN",
+    "role": "pitcher",
+    "subrole": "starter",
+    "must_track": true,
+    "wbc_2026": true,
+    "confidence": "high",
+    "notes": "Protected WBC subset."
+  },
+  {
+    "name": "Ranger Suarez",
+    "team": "BOS",
+    "role": "pitcher",
+    "subrole": "starter",
+    "must_track": true,
+    "wbc_2026": true,
+    "confidence": "medium",
+    "notes": "Included from MLB WBC roster coverage; verify current club during final curation."
+  },
+  {
+    "name": "Jesus Luzardo",
+    "team": "PHI",
+    "role": "pitcher",
+    "subrole": "starter",
+    "must_track": true,
+    "wbc_2026": true,
+    "confidence": "high",
+    "notes": "Protected WBC subset."
+  },
+  {
+    "name": "Eduardo Rodriguez",
+    "team": "AZ",
+    "role": "pitcher",
+    "subrole": "starter",
+    "must_track": true,
+    "wbc_2026": true,
+    "confidence": "high",
+    "notes": "Protected WBC subset."
+  },
+  {
+    "name": "Jose Alvarado",
+    "team": "PHI",
+    "role": "pitcher",
+    "subrole": "reliever",
+    "must_track": true,
+    "wbc_2026": true,
+    "confidence": "high",
+    "notes": "Protected WBC subset."
+  },
+  {
+    "name": "Robert Suarez",
+    "team": null,
+    "role": "pitcher",
+    "subrole": "reliever",
+    "must_track": true,
+    "wbc_2026": false,
+    "confidence": "medium",
+    "notes": "High-priority Venezuelan reliever; verify 2026 club during final curation."
+  },
+  {
+    "name": "Brusdar Graterol",
+    "team": "LAD",
+    "role": "pitcher",
+    "subrole": "reliever",
+    "must_track": false,
+    "wbc_2026": false,
+    "confidence": "medium",
+    "notes": "Candidate broader-universe reliever; verify health and MLB status."
+  },
+  {
+    "name": "Luis Garcia",
+    "team": "HOU",
+    "role": "pitcher",
+    "subrole": "starter",
+    "must_track": false,
+    "wbc_2026": false,
+    "confidence": "medium",
+    "notes": "Candidate broader-universe starter; verify active rotation role."
+  },
+  {
+    "name": "German Marquez",
+    "team": "COL",
+    "role": "pitcher",
+    "subrole": "starter",
+    "must_track": false,
+    "wbc_2026": false,
+    "confidence": "medium",
+    "notes": "Candidate broader-universe starter; verify current MLB status."
+  },
+  {
+    "name": "Martin Perez",
+    "team": null,
+    "role": "pitcher",
+    "subrole": "starter",
+    "must_track": false,
+    "wbc_2026": false,
+    "confidence": "low",
+    "notes": "Candidate veteran lefty; verify 2026 MLB status and club."
+  },
+  {
+    "name": "Antonio Senzatela",
+    "team": "COL",
+    "role": "pitcher",
+    "subrole": "starter",
+    "must_track": true,
+    "wbc_2026": true,
+    "confidence": "high",
+    "notes": "Protected WBC subset."
+  },
+  {
+    "name": "Keider Montero",
+    "team": "DET",
+    "role": "pitcher",
+    "subrole": "starter",
+    "must_track": true,
+    "wbc_2026": true,
+    "confidence": "high",
+    "notes": "Protected WBC subset."
+  },
+  {
+    "name": "Jose Butto",
+    "team": "SF",
+    "role": "pitcher",
+    "subrole": "starter",
+    "must_track": true,
+    "wbc_2026": true,
+    "confidence": "medium",
+    "notes": "Included from MLB WBC roster coverage; verify role/team during final curation."
+  },
+  {
+    "name": "Angel Zerpa",
+    "team": "MIL",
+    "role": "pitcher",
+    "subrole": "reliever",
+    "must_track": true,
+    "wbc_2026": true,
+    "confidence": "high",
+    "notes": "Protected WBC subset."
+  },
+  {
+    "name": "Eduard Bazardo",
+    "team": "SEA",
+    "role": "pitcher",
+    "subrole": "reliever",
+    "must_track": true,
+    "wbc_2026": true,
+    "confidence": "high",
+    "notes": "Protected WBC subset."
+  },
+  {
+    "name": "Yoendrys Gomez",
+    "team": "TB",
+    "role": "pitcher",
+    "subrole": "reliever",
+    "must_track": true,
+    "wbc_2026": true,
+    "confidence": "high",
+    "notes": "Protected WBC subset."
+  },
+  {
+    "name": "Enmanuel De Jesus",
+    "team": "DET",
+    "role": "pitcher",
+    "subrole": "starter",
+    "must_track": true,
+    "wbc_2026": true,
+    "confidence": "high",
+    "notes": "Protected WBC subset."
+  },
+  {
+    "name": "Luinder Avila",
+    "team": "KC",
+    "role": "pitcher",
+    "subrole": "starter",
+    "must_track": true,
+    "wbc_2026": true,
+    "confidence": "high",
+    "notes": "Protected WBC subset."
+  },
+  {
+    "name": "Jhonathan Diaz",
+    "team": "SEA",
+    "role": "pitcher",
+    "subrole": "starter",
+    "must_track": true,
+    "wbc_2026": true,
+    "confidence": "high",
+    "notes": "Protected WBC subset."
+  },
+  {
+    "name": "Eduardo Salazar",
+    "team": "MIN",
+    "role": "pitcher",
+    "subrole": "reliever",
+    "must_track": true,
+    "wbc_2026": true,
+    "confidence": "high",
+    "notes": "Protected WBC subset."
+  },
+  {
+    "name": "Daniel Palencia",
+    "team": "CHC",
+    "role": "pitcher",
+    "subrole": "reliever",
+    "must_track": false,
+    "wbc_2026": false,
+    "confidence": "medium",
+    "notes": "Candidate broader-universe reliever; verify 2026 MLB role."
+  },
+  {
+    "name": "Jose Ruiz",
+    "team": "PHI",
+    "role": "pitcher",
+    "subrole": "reliever",
+    "must_track": false,
+    "wbc_2026": false,
+    "confidence": "medium",
+    "notes": "Candidate broader-universe reliever; verify 2026 MLB role."
+  },
+  {
+    "name": "Carlos Hernandez",
+    "team": null,
+    "role": "pitcher",
+    "subrole": "reliever",
+    "must_track": false,
+    "wbc_2026": false,
+    "confidence": "low",
+    "notes": "Candidate broader-universe arm; verify 2026 MLB status and club."
+  }
+]

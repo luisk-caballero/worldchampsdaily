@@ -1,0 +1,19 @@
+{
+  "batters": {
+    "default_min_plate_appearances_ytd": 25,
+    "watch_window_days_after_last_appearance": 14,
+    "always_include_groups": ["wbc_2026_venezuela"],
+    "notes": "Suppress bench-only noise in the default daily report while still allowing manually pinned players."
+  },
+  "pitchers": {
+    "default_min_innings_pitched_ytd": 8.0,
+    "default_min_appearances_ytd_for_relievers": 5,
+    "watch_window_days_after_last_appearance": 21,
+    "always_include_groups": ["wbc_2026_venezuela"],
+    "notes": "Include low-volume pitchers only when manually pinned or recently active."
+  },
+  "overrides": {
+    "manual_include": [],
+    "manual_exclude": []
+  }
+}

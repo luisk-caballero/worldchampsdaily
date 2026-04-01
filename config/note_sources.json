@@ -1,0 +1,11 @@
+{
+  "allowed_sources": [
+    "mlb.com",
+    "espn.com",
+    "cbssports.com",
+    "sports.yahoo.com"
+    ,
+    "apnews.com"
+  ],
+  "notes": "Keep media-note sourcing narrow and auditable for MVP."
+}

@@ -1,0 +1,47 @@
+[
+  {
+    "mlb_id": 660670,
+    "name": "Ronald Acuna Jr.",
+    "role": "batter",
+    "team": "ATL",
+    "active": true,
+    "birth_country": "Venezuela",
+    "notes": "Sample entry for curated review."
+  },
+  {
+    "mlb_id": 672284,
+    "name": "Luis Arraez",
+    "role": "batter",
+    "team": "SD",
+    "active": true,
+    "birth_country": "Venezuela",
+    "notes": "Sample entry for curated review."
+  },
+  {
+    "mlb_id": 543037,
+    "name": "Jose Altuve",
+    "role": "batter",
+    "team": "HOU",
+    "active": true,
+    "birth_country": "Venezuela",
+    "notes": "Sample entry for curated review."
+  },
+  {
+    "mlb_id": 622491,
+    "name": "Pablo Lopez",
+    "role": "pitcher",
+    "team": "MIN",
+    "active": true,
+    "birth_country": "Venezuela",
+    "notes": "Sample entry for curated review."
+  },
+  {
+    "mlb_id": 606192,
+    "name": "Eduardo Rodriguez",
+    "role": "pitcher",
+    "team": "AZ",
+    "active": true,
+    "birth_country": "Venezuela",
+    "notes": "Sample entry for curated review."
+  }
+]

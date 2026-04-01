@@ -1,0 +1,434 @@
+[
+  {
+    "name": "Ronald Acuna Jr.",
+    "team": "SD",
+    "role": "batter",
+    "subrole": null,
+    "groups": ["wbc_2026_venezuela"],
+    "tracking_tier": "core",
+    "must_track": true
+  },
+  {
+    "name": "Jose Altuve",
+    "team": "HOU",
+    "role": "batter",
+    "subrole": null,
+    "groups": [],
+    "tracking_tier": "core",
+    "must_track": true
+  },
+  {
+    "name": "Luis Arraez",
+    "team": "SF",
+    "role": "batter",
+    "subrole": null,
+    "groups": ["wbc_2026_venezuela"],
+    "tracking_tier": "core",
+    "must_track": true
+  },
+  {
+    "name": "Anthony Santander",
+    "team": "TOR",
+    "role": "batter",
+    "subrole": null,
+    "groups": [],
+    "tracking_tier": "core",
+    "must_track": true
+  },
+  {
+    "name": "Gleyber Torres",
+    "team": "DET",
+    "role": "batter",
+    "subrole": null,
+    "groups": ["wbc_2026_venezuela"],
+    "tracking_tier": "core",
+    "must_track": true
+  },
+  {
+    "name": "Eugenio Suarez",
+    "team": "CIN",
+    "role": "batter",
+    "subrole": null,
+    "groups": ["wbc_2026_venezuela"],
+    "tracking_tier": "core",
+    "must_track": true
+  },
+  {
+    "name": "Salvador Perez",
+    "team": "KC",
+    "role": "batter",
+    "subrole": null,
+    "groups": ["wbc_2026_venezuela"],
+    "tracking_tier": "core",
+    "must_track": true
+  },
+  {
+    "name": "William Contreras",
+    "team": "MIL",
+    "role": "batter",
+    "subrole": null,
+    "groups": ["wbc_2026_venezuela"],
+    "tracking_tier": "core",
+    "must_track": true
+  },
+  {
+    "name": "Willson Contreras",
+    "team": "BOS",
+    "role": "batter",
+    "subrole": null,
+    "groups": ["wbc_2026_venezuela"],
+    "tracking_tier": "core",
+    "must_track": true
+  },
+  {
+    "name": "Maikel Garcia",
+    "team": "KC",
+    "role": "batter",
+    "subrole": null,
+    "groups": ["wbc_2026_venezuela"],
+    "tracking_tier": "core",
+    "must_track": true
+  },
+  {
+    "name": "Andres Gimenez",
+    "team": "TOR",
+    "role": "batter",
+    "subrole": null,
+    "groups": [],
+    "tracking_tier": "core",
+    "must_track": true
+  },
+  {
+    "name": "Jackson Chourio",
+    "team": "MIL",
+    "role": "batter",
+    "subrole": null,
+    "groups": ["wbc_2026_venezuela"],
+    "tracking_tier": "core",
+    "must_track": true
+  },
+  {
+    "name": "Wilyer Abreu",
+    "team": "BOS",
+    "role": "batter",
+    "subrole": null,
+    "groups": ["wbc_2026_venezuela"],
+    "tracking_tier": "core",
+    "must_track": true
+  },
+  {
+    "name": "Ezequiel Tovar",
+    "team": "COL",
+    "role": "batter",
+    "subrole": null,
+    "groups": ["wbc_2026_venezuela"],
+    "tracking_tier": "core",
+    "must_track": true
+  },
+  {
+    "name": "Javier Sanoja",
+    "team": "MIA",
+    "role": "batter",
+    "subrole": null,
+    "groups": ["wbc_2026_venezuela"],
+    "tracking_tier": "active",
+    "must_track": true
+  },
+  {
+    "name": "Francisco Alvarez",
+    "team": "NYM",
+    "role": "batter",
+    "subrole": null,
+    "groups": [],
+    "tracking_tier": "core",
+    "must_track": true
+  },
+  {
+    "name": "Gabriel Moreno",
+    "team": "AZ",
+    "role": "batter",
+    "subrole": null,
+    "groups": [],
+    "tracking_tier": "core",
+    "must_track": true
+  },
+  {
+    "name": "Wilmer Flores",
+    "team": "SF",
+    "role": "batter",
+    "subrole": null,
+    "groups": [],
+    "tracking_tier": "active",
+    "must_track": false
+  },
+  {
+    "name": "Luisangel Acuna",
+    "team": "NYM",
+    "role": "batter",
+    "subrole": null,
+    "groups": [],
+    "tracking_tier": "watch",
+    "must_track": false
+  },
+  {
+    "name": "Leo Rivas",
+    "team": "SEA",
+    "role": "batter",
+    "subrole": null,
+    "groups": [],
+    "tracking_tier": "watch",
+    "must_track": false
+  },
+  {
+    "name": "Luis Matos",
+    "team": "SF",
+    "role": "batter",
+    "subrole": null,
+    "groups": [],
+    "tracking_tier": "watch",
+    "must_track": false
+  },
+  {
+    "name": "Oswald Peraza",
+    "team": "NYY",
+    "role": "batter",
+    "subrole": null,
+    "groups": [],
+    "tracking_tier": "watch",
+    "must_track": false
+  },
+  {
+    "name": "Oswaldo Cabrera",
+    "team": "NYY",
+    "role": "batter",
+    "subrole": null,
+    "groups": [],
+    "tracking_tier": "watch",
+    "must_track": false
+  },
+  {
+    "name": "Ildemaro Vargas",
+    "team": null,
+    "role": "batter",
+    "subrole": null,
+    "groups": [],
+    "tracking_tier": "archive",
+    "must_track": false
+  },
+  {
+    "name": "Orlando Arcia",
+    "team": null,
+    "role": "batter",
+    "subrole": null,
+    "groups": [],
+    "tracking_tier": "archive",
+    "must_track": false
+  },
+  {
+    "name": "Pablo Lopez",
+    "team": "MIN",
+    "role": "pitcher",
+    "subrole": "starter",
+    "groups": ["wbc_2026_venezuela"],
+    "tracking_tier": "core",
+    "must_track": true
+  },
+  {
+    "name": "Ranger Suarez",
+    "team": "BOS",
+    "role": "pitcher",
+    "subrole": "starter",
+    "groups": ["wbc_2026_venezuela"],
+    "tracking_tier": "core",
+    "must_track": true
+  },
+  {
+    "name": "Jesus Luzardo",
+    "team": "PHI",
+    "role": "pitcher",
+    "subrole": "starter",
+    "groups": ["wbc_2026_venezuela"],
+    "tracking_tier": "core",
+    "must_track": true
+  },
+  {
+    "name": "Eduardo Rodriguez",
+    "team": "AZ",
+    "role": "pitcher",
+    "subrole": "starter",
+    "groups": ["wbc_2026_venezuela"],
+    "tracking_tier": "core",
+    "must_track": true
+  },
+  {
+    "name": "Jose Alvarado",
+    "team": "PHI",
+    "role": "pitcher",
+    "subrole": "reliever",
+    "groups": ["wbc_2026_venezuela"],
+    "tracking_tier": "core",
+    "must_track": true
+  },
+  {
+    "name": "Robert Suarez",
+    "team": "ATL",
+    "role": "pitcher",
+    "subrole": "reliever",
+    "groups": [],
+    "tracking_tier": "core",
+    "must_track": true
+  },
+  {
+    "name": "Antonio Senzatela",
+    "team": "COL",
+    "role": "pitcher",
+    "subrole": "starter",
+    "groups": ["wbc_2026_venezuela"],
+    "tracking_tier": "active",
+    "must_track": true
+  },
+  {
+    "name": "Keider Montero",
+    "team": "DET",
+    "role": "pitcher",
+    "subrole": "starter",
+    "groups": ["wbc_2026_venezuela"],
+    "tracking_tier": "active",
+    "must_track": true
+  },
+  {
+    "name": "Jose Butto",
+    "team": "SF",
+    "role": "pitcher",
+    "subrole": "starter",
+    "groups": ["wbc_2026_venezuela"],
+    "tracking_tier": "active",
+    "must_track": true
+  },
+  {
+    "name": "Angel Zerpa",
+    "team": "MIL",
+    "role": "pitcher",
+    "subrole": "reliever",
+    "groups": ["wbc_2026_venezuela"],
+    "tracking_tier": "active",
+    "must_track": true
+  },
+  {
+    "name": "Eduard Bazardo",
+    "team": "SEA",
+    "role": "pitcher",
+    "subrole": "reliever",
+    "groups": ["wbc_2026_venezuela"],
+    "tracking_tier": "active",
+    "must_track": true
+  },
+  {
+    "name": "Yoendrys Gomez",
+    "team": "TB",
+    "role": "pitcher",
+    "subrole": "reliever",
+    "groups": ["wbc_2026_venezuela"],
+    "tracking_tier": "active",
+    "must_track": true
+  },
+  {
+    "name": "Enmanuel De Jesus",
+    "team": "DET",
+    "role": "pitcher",
+    "subrole": "starter",
+    "groups": ["wbc_2026_venezuela"],
+    "tracking_tier": "watch",
+    "must_track": true
+  },
+  {
+    "name": "Luinder Avila",
+    "team": "KC",
+    "role": "pitcher",
+    "subrole": "starter",
+    "groups": ["wbc_2026_venezuela"],
+    "tracking_tier": "watch",
+    "must_track": true
+  },
+  {
+    "name": "Jhonathan Diaz",
+    "team": "SEA",
+    "role": "pitcher",
+    "subrole": "starter",
+    "groups": ["wbc_2026_venezuela"],
+    "tracking_tier": "watch",
+    "must_track": true
+  },
+  {
+    "name": "Eduardo Salazar",
+    "team": "MIN",
+    "role": "pitcher",
+    "subrole": "reliever",
+    "groups": ["wbc_2026_venezuela"],
+    "tracking_tier": "watch",
+    "must_track": true
+  },
+  {
+    "name": "German Marquez",
+    "team": "COL",
+    "role": "pitcher",
+    "subrole": "starter",
+    "groups": [],
+    "tracking_tier": "active",
+    "must_track": false
+  },
+  {
+    "name": "Luis Garcia",
+    "team": "HOU",
+    "role": "pitcher",
+    "subrole": "starter",
+    "groups": [],
+    "tracking_tier": "active",
+    "must_track": false
+  },
+  {
+    "name": "Martin Perez",
+    "team": null,
+    "role": "pitcher",
+    "subrole": "starter",
+    "groups": [],
+    "tracking_tier": "archive",
+    "must_track": false
+  },
+  {
+    "name": "Brusdar Graterol",
+    "team": "LAD",
+    "role": "pitcher",
+    "subrole": "reliever",
+    "groups": [],
+    "tracking_tier": "watch",
+    "must_track": false
+  },
+  {
+    "name": "Daniel Palencia",
+    "team": "CHC",
+    "role": "pitcher",
+    "subrole": "reliever",
+    "groups": [],
+    "tracking_tier": "watch",
+    "must_track": false
+  },
+  {
+    "name": "Jose Ruiz",
+    "team": "PHI",
+    "role": "pitcher",
+    "subrole": "reliever",
+    "groups": [],
+    "tracking_tier": "watch",
+    "must_track": false
+  },
+  {
+    "name": "Carlos Hernandez",
+    "team": null,
+    "role": "pitcher",
+    "subrole": "reliever",
+    "groups": [],
+    "tracking_tier": "archive",
+    "must_track": false
+  }
+]

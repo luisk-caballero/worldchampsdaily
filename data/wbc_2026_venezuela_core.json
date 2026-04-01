@@ -1,0 +1,254 @@
+[
+  {
+    "name": "Ronald Acuna Jr.",
+    "team": "ATL",
+    "role": "batter",
+    "subrole": null,
+    "must_track": true,
+    "groups": ["wbc_2026_venezuela"],
+    "source": "https://www.mlb.com/news/venezuela-2026-world-baseball-classic-roster"
+  },
+  {
+    "name": "Maikel Garcia",
+    "team": "KC",
+    "role": "batter",
+    "subrole": null,
+    "must_track": true,
+    "groups": ["wbc_2026_venezuela"],
+    "source": "https://www.mlb.com/news/venezuela-2026-world-baseball-classic-roster"
+  },
+  {
+    "name": "Jackson Chourio",
+    "team": "MIL",
+    "role": "batter",
+    "subrole": null,
+    "must_track": true,
+    "groups": ["wbc_2026_venezuela"],
+    "source": "https://www.mlb.com/news/venezuela-2026-world-baseball-classic-roster"
+  },
+  {
+    "name": "Wilyer Abreu",
+    "team": "BOS",
+    "role": "batter",
+    "subrole": null,
+    "must_track": true,
+    "groups": ["wbc_2026_venezuela"],
+    "source": "https://www.mlb.com/news/venezuela-2026-world-baseball-classic-roster"
+  },
+  {
+    "name": "Salvador Perez",
+    "team": "KC",
+    "role": "batter",
+    "subrole": null,
+    "must_track": true,
+    "groups": ["wbc_2026_venezuela"],
+    "source": "https://www.mlb.com/news/mlb-players-on-2026-world-baseball-classic-rosters"
+  },
+  {
+    "name": "William Contreras",
+    "team": "MIL",
+    "role": "batter",
+    "subrole": null,
+    "must_track": true,
+    "groups": ["wbc_2026_venezuela"],
+    "source": "https://www.mlb.com/news/mlb-players-on-2026-world-baseball-classic-rosters"
+  },
+  {
+    "name": "Luis Arraez",
+    "team": "SF",
+    "role": "batter",
+    "subrole": null,
+    "must_track": true,
+    "groups": ["wbc_2026_venezuela"],
+    "source": "https://www.mlb.com/news/mlb-players-on-2026-world-baseball-classic-rosters"
+  },
+  {
+    "name": "Willson Contreras",
+    "team": "BOS",
+    "role": "batter",
+    "subrole": null,
+    "must_track": true,
+    "groups": ["wbc_2026_venezuela"],
+    "source": "https://www.mlb.com/news/mlb-players-on-2026-world-baseball-classic-rosters"
+  },
+  {
+    "name": "Eugenio Suarez",
+    "team": "CIN",
+    "role": "batter",
+    "subrole": null,
+    "must_track": true,
+    "groups": ["wbc_2026_venezuela"],
+    "source": "https://www.mlb.com/news/mlb-players-on-2026-world-baseball-classic-rosters"
+  },
+  {
+    "name": "Ezequiel Tovar",
+    "team": "COL",
+    "role": "batter",
+    "subrole": null,
+    "must_track": true,
+    "groups": ["wbc_2026_venezuela"],
+    "source": "https://www.mlb.com/news/mlb-players-on-2026-world-baseball-classic-rosters"
+  },
+  {
+    "name": "Gleyber Torres",
+    "team": "DET",
+    "role": "batter",
+    "subrole": null,
+    "must_track": true,
+    "groups": ["wbc_2026_venezuela"],
+    "source": "https://www.mlb.com/news/mlb-players-on-2026-world-baseball-classic-rosters"
+  },
+  {
+    "name": "Javier Sanoja",
+    "team": "MIA",
+    "role": "batter",
+    "subrole": null,
+    "must_track": true,
+    "groups": ["wbc_2026_venezuela"],
+    "source": "https://www.mlb.com/news/mlb-players-on-2026-world-baseball-classic-rosters"
+  },
+  {
+    "name": "Pablo Lopez",
+    "team": "MIN",
+    "role": "pitcher",
+    "subrole": "starter",
+    "must_track": true,
+    "groups": ["wbc_2026_venezuela"],
+    "source": "https://www.mlb.com/news/mlb-players-on-2026-world-baseball-classic-rosters"
+  },
+  {
+    "name": "Eduardo Rodriguez",
+    "team": "AZ",
+    "role": "pitcher",
+    "subrole": "starter",
+    "must_track": true,
+    "groups": ["wbc_2026_venezuela"],
+    "source": "https://www.mlb.com/news/mlb-players-on-2026-world-baseball-classic-rosters"
+  },
+  {
+    "name": "Jesus Luzardo",
+    "team": "PHI",
+    "role": "pitcher",
+    "subrole": "starter",
+    "must_track": true,
+    "groups": ["wbc_2026_venezuela"],
+    "source": "https://www.mlb.com/news/mlb-players-on-2026-world-baseball-classic-rosters"
+  },
+  {
+    "name": "Antonio Senzatela",
+    "team": "COL",
+    "role": "pitcher",
+    "subrole": "starter",
+    "must_track": true,
+    "groups": ["wbc_2026_venezuela"],
+    "source": "https://www.mlb.com/news/mlb-players-on-2026-world-baseball-classic-rosters"
+  },
+  {
+    "name": "Keider Montero",
+    "team": "DET",
+    "role": "pitcher",
+    "subrole": "starter",
+    "must_track": true,
+    "groups": ["wbc_2026_venezuela"],
+    "source": "https://www.mlb.com/news/mlb-players-on-2026-world-baseball-classic-rosters"
+  },
+  {
+    "name": "Jose Alvarado",
+    "team": "PHI",
+    "role": "pitcher",
+    "subrole": "reliever",
+    "must_track": true,
+    "groups": ["wbc_2026_venezuela"],
+    "source": "https://www.mlb.com/news/mlb-players-on-2026-world-baseball-classic-rosters"
+  },
+  {
+    "name": "Ranger Suarez",
+    "team": "BOS",
+    "role": "pitcher",
+    "subrole": "starter",
+    "must_track": true,
+    "groups": ["wbc_2026_venezuela"],
+    "source": "https://www.mlb.com/news/mlb-players-on-2026-world-baseball-classic-rosters"
+  },
+  {
+    "name": "Angel Zerpa",
+    "team": "MIL",
+    "role": "pitcher",
+    "subrole": "reliever",
+    "must_track": true,
+    "groups": ["wbc_2026_venezuela"],
+    "source": "https://www.mlb.com/news/mlb-players-on-2026-world-baseball-classic-rosters"
+  },
+  {
+    "name": "Jose Butto",
+    "team": "SF",
+    "role": "pitcher",
+    "subrole": "starter",
+    "must_track": true,
+    "groups": ["wbc_2026_venezuela"],
+    "source": "https://www.mlb.com/news/mlb-players-on-2026-world-baseball-classic-rosters"
+  },
+  {
+    "name": "Eduard Bazardo",
+    "team": "SEA",
+    "role": "pitcher",
+    "subrole": "reliever",
+    "must_track": true,
+    "groups": ["wbc_2026_venezuela"],
+    "source": "https://www.mlb.com/news/mlb-players-on-2026-world-baseball-classic-rosters"
+  },
+  {
+    "name": "Yoendrys Gomez",
+    "team": "TB",
+    "role": "pitcher",
+    "subrole": "reliever",
+    "must_track": true,
+    "groups": ["wbc_2026_venezuela"],
+    "source": "https://www.mlb.com/news/mlb-players-on-2026-world-baseball-classic-rosters"
+  },
+  {
+    "name": "Enmanuel De Jesus",
+    "team": "DET",
+    "role": "pitcher",
+    "subrole": "starter",
+    "must_track": true,
+    "groups": ["wbc_2026_venezuela"],
+    "source": "https://www.mlb.com/news/mlb-players-on-2026-world-baseball-classic-rosters"
+  },
+  {
+    "name": "Luinder Avila",
+    "team": "KC",
+    "role": "pitcher",
+    "subrole": "starter",
+    "must_track": true,
+    "groups": ["wbc_2026_venezuela"],
+    "source": "https://www.mlb.com/news/mlb-players-on-2026-world-baseball-classic-rosters"
+  },
+  {
+    "name": "Christian Suarez",
+    "team": "LAD",
+    "role": "pitcher",
+    "subrole": "reliever",
+    "must_track": true,
+    "groups": ["wbc_2026_venezuela"],
+    "source": "https://www.mlb.com/news/mlb-players-on-2026-world-baseball-classic-rosters"
+  },
+  {
+    "name": "Jhonathan Diaz",
+    "team": "SEA",
+    "role": "pitcher",
+    "subrole": "starter",
+    "must_track": true,
+    "groups": ["wbc_2026_venezuela"],
+    "source": "https://www.mlb.com/news/mlb-players-on-2026-world-baseball-classic-rosters"
+  },
+  {
+    "name": "Eduardo Salazar",
+    "team": "MIN",
+    "role": "pitcher",
+    "subrole": "reliever",
+    "must_track": true,
+    "groups": ["wbc_2026_venezuela"],
+    "source": "https://www.mlb.com/news/mlb-players-on-2026-world-baseball-classic-rosters"
+  }
+]

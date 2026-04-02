@@ -66,6 +66,26 @@ This writes:
 
 That `site/` folder is the one to deploy to static hosting.
 
+## Daily Pipeline
+
+The project also supports a single daily pipeline command that refreshes live data,
+reuses or refreshes history, rebuilds the report, republishes the static site, and
+optionally pushes the updated `site/` output to GitHub for Cloudflare Pages.
+
+Example:
+
+```bash
+PYTHONPATH=src python3 -m venezuelan_mlb_report run-daily \
+  --season 2026 \
+  --as-of-date 2026-04-01 \
+  --history-mode if-missing \
+  --publish-site-dir site \
+  --git-push
+```
+
+If `--git-push` is used, only the `site/` output is staged, committed, and pushed.
+That keeps deployment changes separate from any in-progress code edits in the repo.
+
 ## MVP roadmap
 
 - Replace sample data with MLB data ingestion

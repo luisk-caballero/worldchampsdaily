@@ -1,7 +1,8 @@
 from __future__ import annotations
 
 import argparse
-from datetime import datetime
+import subprocess
+from datetime import date, datetime
 from pathlib import Path
 
 from venezuelan_mlb_report.ingest import (
@@ -19,6 +20,44 @@ from venezuelan_mlb_report.universe import load_tracking_rules, load_universe, s
 
 
 DEFAULT_DB_PATH = Path("var/report.db")
+
+
+def _run_git(repo_dir: Path, *args: str) -> subprocess.CompletedProcess[str]:
+    return subprocess.run(
+        ["git", *args],
+        cwd=repo_dir,
+        check=False,
+        text=True,
+        capture_output=True,
+    )
+
+
+def _push_site_updates(repo_dir: Path, report_date: date, commit_message: str) -> bool:
+    add_result = _run_git(repo_dir, "add", "site")
+    if add_result.returncode != 0:
+        raise RuntimeError(add_result.stderr.strip() or "Failed to stage site output")
+
+    diff_result = _run_git(repo_dir, "diff", "--cached", "--quiet", "--", "site")
+    if diff_result.returncode == 0:
+        print("No site changes detected; skipping git commit and push.")
+        return False
+    if diff_result.returncode not in (0, 1):
+        raise RuntimeError(diff_result.stderr.strip() or "Failed to inspect staged site changes")
+
+    commit_result = _run_git(repo_dir, "commit", "-m", commit_message.format(report_date=report_date.isoformat()))
+    if commit_result.returncode != 0:
+        raise RuntimeError(commit_result.stderr.strip() or "Failed to commit site changes")
+    if commit_result.stdout.strip():
+        print(commit_result.stdout.strip())
+
+    push_result = _run_git(repo_dir, "push", "origin", "HEAD")
+    if push_result.returncode != 0:
+        raise RuntimeError(push_result.stderr.strip() or "Failed to push site changes")
+    if push_result.stdout.strip():
+        print(push_result.stdout.strip())
+    if push_result.stderr.strip():
+        print(push_result.stderr.strip())
+    return True
 
 
 def main() -> None:
@@ -51,6 +90,24 @@ def main() -> None:
     report_parser.add_argument("--history-input", type=Path, default=Path("var/historical_player_stats.json"))
     report_parser.add_argument("--output", type=Path, default=Path("var/live_report.html"))
     report_parser.add_argument("--publish-site-dir", type=Path)
+
+    daily_parser = subparsers.add_parser("run-daily", help="Run the full daily pipeline and optionally push the site")
+    daily_parser.add_argument("--season", type=int)
+    daily_parser.add_argument("--as-of-date", type=str)
+    daily_parser.add_argument("--tiers", nargs="+", default=["core", "active"])
+    daily_parser.add_argument("--live-output", type=Path, default=Path("var/live_player_stats.json"))
+    daily_parser.add_argument("--history-output", type=Path, default=Path("var/historical_player_stats_full.json"))
+    daily_parser.add_argument("--history-start", type=int, default=2010)
+    daily_parser.add_argument("--history-mode", choices=("if-missing", "refresh", "skip"), default="if-missing")
+    daily_parser.add_argument("--report-output", type=Path, default=Path("var/live_report.html"))
+    daily_parser.add_argument("--publish-site-dir", type=Path, default=Path("site"))
+    daily_parser.add_argument("--git-push", action="store_true")
+    daily_parser.add_argument("--repo-dir", type=Path, default=Path("."))
+    daily_parser.add_argument(
+        "--commit-message",
+        default="Update daily report for {report_date}",
+        help="Git commit message template. Use {report_date} for the report date.",
+    )
 
     args = parser.parse_args()
 
@@ -103,6 +160,49 @@ def main() -> None:
             print(f"Published site latest page to {latest_path}")
             print(f"Published site archive page to {archive_path}")
         print(f"Wrote live HTML report to {args.output}")
+        return
+
+    if args.command == "run-daily":
+        report_date = datetime.strptime(args.as_of_date, "%Y-%m-%d").date() if args.as_of_date else date.today()
+        season = args.season or report_date.year
+
+        universe = load_universe()
+        tracking_rules = load_tracking_rules()
+        selected_players = select_seed_players(universe, tuple(args.tiers))
+
+        live_snapshots = build_live_snapshots(selected_players, tracking_rules, season)
+        write_snapshots(args.live_output, live_snapshots)
+        print(f"Wrote {len(live_snapshots)} live player snapshots to {args.live_output}")
+
+        history_needed = args.history_mode == "refresh" or (
+            args.history_mode == "if-missing" and not args.history_output.exists()
+        )
+        if history_needed:
+            history_end = season - 1
+            historical_snapshots = build_historical_snapshots(selected_players, args.history_start, history_end)
+            write_historical_snapshots(args.history_output, historical_snapshots)
+            print(f"Wrote {len(historical_snapshots)} historical season snapshots to {args.history_output}")
+        elif args.history_mode == "skip" and not args.history_output.exists():
+            raise FileNotFoundError(f"History file not found: {args.history_output}")
+        else:
+            print(f"Using existing historical snapshots at {args.history_output}")
+
+        report = build_live_daily_report(
+            live_path=args.live_output,
+            historical_path=args.history_output,
+            as_of_date=report_date,
+            season=season,
+        )
+        write_live_report_html(args.report_output, report)
+        latest_path, archive_path = publish_static_site(args.report_output, report_date, args.publish_site_dir)
+        print(f"Published site latest page to {latest_path}")
+        print(f"Published site archive page to {archive_path}")
+        print(f"Wrote live HTML report to {args.report_output}")
+
+        if args.git_push:
+            pushed = _push_site_updates(args.repo_dir.resolve(), report_date, args.commit_message)
+            if pushed:
+                print("Pushed updated site output to GitHub.")
         return
 
 

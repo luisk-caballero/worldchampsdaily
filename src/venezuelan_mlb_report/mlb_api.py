@@ -1,13 +1,18 @@
 from __future__ import annotations
 
 import json
+import time
 from dataclasses import dataclass
 from typing import Any
+from urllib.error import HTTPError, URLError
 from urllib.parse import quote
 from urllib.request import urlopen
 
 
 BASE_URL = "https://statsapi.mlb.com/api/v1"
+DEFAULT_TIMEOUT_SECONDS = 15
+DEFAULT_RETRIES = 3
+RETRYABLE_HTTP_STATUSES = {429, 500, 502, 503, 504}
 
 
 class MLBApiError(RuntimeError):
@@ -25,9 +30,26 @@ class ResolvedPlayer:
     debut_date: str | None
 
 
+def _read_url(url: str, *, timeout: int = DEFAULT_TIMEOUT_SECONDS, retries: int = DEFAULT_RETRIES) -> bytes:
+    last_error: Exception | None = None
+    for attempt in range(1, retries + 1):
+        try:
+            with urlopen(url, timeout=timeout) as response:
+                return response.read()
+        except HTTPError as exc:
+            last_error = exc
+            if exc.code not in RETRYABLE_HTTP_STATUSES or attempt == retries:
+                break
+        except URLError as exc:
+            last_error = exc
+            if attempt == retries:
+                break
+        time.sleep(1.5 * attempt)
+    raise MLBApiError(f"Failed to fetch {url}: {last_error}") from last_error
+
+
 def _get_json(url: str) -> dict[str, Any]:
-    with urlopen(url) as response:
-        return json.loads(response.read().decode("utf-8"))
+    return json.loads(_read_url(url).decode("utf-8"))
 
 
 def search_person_by_name(name: str) -> ResolvedPlayer | None:

@@ -5,10 +5,9 @@ import xml.etree.ElementTree as ET
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from urllib.parse import quote
-from urllib.request import urlopen
 
 from venezuelan_mlb_report.labels import TrendRuleInput, classify_batter_status, classify_pitcher_status
-from venezuelan_mlb_report.mlb_api import fetch_game_content, fetch_game_logs
+from venezuelan_mlb_report.mlb_api import _read_url, fetch_game_content, fetch_game_logs
 from venezuelan_mlb_report.models import DailyReport, LastNightLine, Player, PlayerSnapshot, WindowStats
 from venezuelan_mlb_report.report import render_email_report_html
 
@@ -179,7 +178,7 @@ def _search_external_note(
     query = f'"{player_name}" "{opponent}" "{team}" ({sources_query}) ("game recap" OR recap OR beat OR defeated OR win OR loss)'
     url = "https://news.google.com/rss/search?q=" + quote(query)
     try:
-        root = ET.fromstring(urlopen(url).read())
+        root = ET.fromstring(_read_url(url))
     except Exception:
         cache[key] = ("", None)
         return cache[key]

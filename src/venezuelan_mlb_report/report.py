@@ -50,6 +50,18 @@ def _player_cell_html(snapshot: PlayerSnapshot) -> str:
     )
 
 
+def _sticky_col_style(*, compact: bool = False, header: bool = False) -> str:
+    left = "0"
+    bg = "#f8fafc" if header else "#ffffff"
+    padding = "10px 10px" if compact else "12px 10px"
+    z_index = "6" if header else "5"
+    border = "border-bottom:1px solid #eaecf0;" if header else "border-top:1px solid #eaecf0;"
+    return (
+        f"position:sticky;left:{left};z-index:{z_index};background:{bg};"
+        f"padding:{padding};{border}min-width:190px;max-width:190px;"
+    )
+
+
 def _project_count(value: float, games_played: float, target_games: int) -> float:
     if games_played <= 0:
         return 0.0
@@ -128,10 +140,10 @@ def _render_last_night_table_html(players: list[PlayerSnapshot]) -> str:
         rows.append(
             (
                 "<tr>"
-                f"<td style='padding:12px 14px;border-top:1px solid #eaecf0;'>{_player_cell_html(snapshot)}</td>"
-                f"<td style='padding:12px 14px;border-top:1px solid #eaecf0;color:#475467;'>{escape(snapshot.last_night.opponent)}</td>"
-                f"<td style='padding:12px 14px;border-top:1px solid #eaecf0;color:#101828;white-space:nowrap;'>{escape(snapshot.last_night.summary)}</td>"
-                f"<td style='padding:12px 14px;border-top:1px solid #eaecf0;color:#344054;min-width:280px;'>{note_html}</td>"
+                f"<td style='{_sticky_col_style(compact=True)}'>{_player_cell_html(snapshot)}</td>"
+                f"<td style='padding:10px 8px;border-top:1px solid #eaecf0;color:#475467;white-space:nowrap;min-width:64px;max-width:64px;'>{escape(snapshot.last_night.opponent)}</td>"
+                f"<td style='padding:10px 10px;border-top:1px solid #eaecf0;color:#101828;white-space:nowrap;min-width:180px;'>{escape(snapshot.last_night.summary)}</td>"
+                f"<td style='padding:10px 10px;border-top:1px solid #eaecf0;color:#344054;min-width:230px;'>{note_html}</td>"
                 "</tr>"
             )
         )
@@ -141,12 +153,12 @@ def _render_last_night_table_html(players: list[PlayerSnapshot]) -> str:
         )
     return (
         "<div style='background:#ffffff;border:1px solid #eaecf0;border-radius:16px;overflow-x:auto;'>"
-        "<table style='width:100%;border-collapse:collapse;border-spacing:0;min-width:980px;'>"
+        "<table style='width:100%;border-collapse:collapse;border-spacing:0;min-width:760px;'>"
         "<thead style='background:#f8fafc;'><tr>"
-        "<th style='text-align:left;padding:12px 14px;color:#667085;font-size:12px;'>Player</th>"
-        "<th style='text-align:left;padding:12px 14px;color:#667085;font-size:12px;'>Opponent</th>"
-        "<th style='text-align:left;padding:12px 14px;color:#667085;font-size:12px;'>Last Night</th>"
-        "<th style='text-align:left;padding:12px 14px;color:#667085;font-size:12px;'>Note</th>"
+        f"<th style='text-align:left;color:#667085;font-size:12px;{_sticky_col_style(compact=True, header=True)}'>Player</th>"
+        "<th style='text-align:left;padding:10px 8px;color:#667085;font-size:12px;white-space:nowrap;min-width:64px;max-width:64px;border-bottom:1px solid #eaecf0;'>Opp</th>"
+        "<th style='text-align:left;padding:10px 10px;color:#667085;font-size:12px;white-space:nowrap;min-width:180px;border-bottom:1px solid #eaecf0;'>Last Night</th>"
+        "<th style='text-align:left;padding:10px 10px;color:#667085;font-size:12px;min-width:230px;border-bottom:1px solid #eaecf0;'>Note</th>"
         "</tr></thead>"
         f"<tbody>{''.join(rows)}</tbody>"
         "</table>"
@@ -165,28 +177,28 @@ def _render_snapshot_table_html(
         ytd_games = snapshot.ytd.metrics.get("games", 0.0)
         projection_games = snapshot.player.projection_games_target or (162 if snapshot.player.role == "batter" else 40)
         row_cells = [
-            f"<td style='padding:12px 14px;border-top:1px solid #eaecf0;white-space:nowrap;'>{_player_cell_html(snapshot)}</td>",
-            f"<td style='padding:12px 14px;border-top:1px solid #eaecf0;color:#475467;'>{escape(snapshot.player.team)}</td>",
+            f"<td style='{_sticky_col_style()}'>{_player_cell_html(snapshot)}</td>",
+            f"<td style='padding:12px 10px;border-top:1px solid #eaecf0;color:#475467;white-space:nowrap;min-width:48px;'>{escape(snapshot.player.team)}</td>",
         ]
         for metric_key, _, decimals, drop_leading_zero in rate_specs:
             row_cells.append(
-                f"<td style='padding:12px 14px;border-top:1px solid #eaecf0;color:#101828;'>{escape(_format_decimal(snapshot.trailing_7.metrics.get(metric_key, 0.0), decimals, drop_leading_zero))}</td>"
+                f"<td style='padding:12px 10px;border-top:1px solid #eaecf0;color:#101828;'>{escape(_format_decimal(snapshot.trailing_7.metrics.get(metric_key, 0.0), decimals, drop_leading_zero))}</td>"
             )
             row_cells.append(
-                f"<td style='padding:12px 14px;border-top:1px solid #eaecf0;color:#101828;'>{escape(_format_decimal(snapshot.ytd.metrics.get(metric_key, 0.0), decimals, drop_leading_zero))}</td>"
+                f"<td style='padding:12px 10px;border-top:1px solid #eaecf0;color:#101828;'>{escape(_format_decimal(snapshot.ytd.metrics.get(metric_key, 0.0), decimals, drop_leading_zero))}</td>"
             )
             row_cells.append(
-                f"<td style='padding:12px 14px;border-top:1px solid #eaecf0;color:#101828;'>{escape(_format_decimal(snapshot.baseline.metrics.get(metric_key, 0.0), decimals, drop_leading_zero))}</td>"
+                f"<td style='padding:12px 10px;border-top:1px solid #eaecf0;color:#101828;'>{escape(_format_decimal(snapshot.baseline.metrics.get(metric_key, 0.0), decimals, drop_leading_zero))}</td>"
             )
         for metric_key, _ in count_specs:
             row_cells.append(
-                f"<td style='padding:12px 14px;border-top:1px solid #eaecf0;color:#101828;'>{int(round(snapshot.trailing_7.metrics.get(metric_key, 0.0)))}</td>"
+                f"<td style='padding:12px 10px;border-top:1px solid #eaecf0;color:#101828;'>{int(round(snapshot.trailing_7.metrics.get(metric_key, 0.0)))}</td>"
             )
             row_cells.append(
-                f"<td style='padding:12px 14px;border-top:1px solid #eaecf0;color:#101828;'>{int(round(_project_count(snapshot.ytd.metrics.get(metric_key, 0.0), ytd_games, projection_games)))}</td>"
+                f"<td style='padding:12px 10px;border-top:1px solid #eaecf0;color:#101828;'>{int(round(_project_count(snapshot.ytd.metrics.get(metric_key, 0.0), ytd_games, projection_games)))}</td>"
             )
             row_cells.append(
-                f"<td style='padding:12px 14px;border-top:1px solid #eaecf0;color:#101828;'>{int(round(_project_count(snapshot.baseline.metrics.get(metric_key, 0.0), snapshot.baseline.metrics.get('games', 0.0), projection_games)))}</td>"
+                f"<td style='padding:12px 10px;border-top:1px solid #eaecf0;color:#101828;'>{int(round(_project_count(snapshot.baseline.metrics.get(metric_key, 0.0), snapshot.baseline.metrics.get('games', 0.0), projection_games)))}</td>"
             )
         rows.append(f"<tr>{''.join(row_cells)}</tr>")
     if not rows:
@@ -195,31 +207,31 @@ def _render_snapshot_table_html(
         )
     return (
         "<div style='background:#ffffff;border:1px solid #eaecf0;border-radius:16px;overflow-x:auto;'>"
-        "<table style='width:100%;border-collapse:collapse;border-spacing:0;min-width:1180px;'>"
+        "<table style='width:100%;border-collapse:collapse;border-spacing:0;min-width:1120px;'>"
         "<thead style='background:#f8fafc;'>"
         "<tr>"
-        "<th rowspan='2' style='text-align:left;padding:12px 14px;color:#667085;font-size:12px;border-bottom:1px solid #eaecf0;'>Player</th>"
-        "<th rowspan='2' style='text-align:left;padding:12px 14px;color:#667085;font-size:12px;border-bottom:1px solid #eaecf0;'>Team</th>"
+        f"<th rowspan='2' style='text-align:left;color:#667085;font-size:12px;{_sticky_col_style(header=True)}'>Player</th>"
+        "<th rowspan='2' style='text-align:left;padding:12px 10px;color:#667085;font-size:12px;border-bottom:1px solid #eaecf0;white-space:nowrap;min-width:48px;'>Tm</th>"
         + "".join(
-            f"<th colspan='3' style='text-align:center;padding:12px 14px;color:#344054;font-size:12px;border-bottom:1px solid #eaecf0;'>{escape(metric_label)}</th>"
+            f"<th colspan='3' style='text-align:center;padding:12px 10px;color:#344054;font-size:12px;border-bottom:1px solid #eaecf0;'>{escape(metric_label)}</th>"
             for _, metric_label, _, _ in rate_specs
         )
         + "".join(
-            f"<th colspan='3' style='text-align:center;padding:12px 14px;color:#344054;font-size:12px;border-bottom:1px solid #eaecf0;'>{escape(metric_label)}</th>"
+            f"<th colspan='3' style='text-align:center;padding:12px 10px;color:#344054;font-size:12px;border-bottom:1px solid #eaecf0;'>{escape(metric_label)}</th>"
             for _, metric_label in count_specs
         )
         + "</tr>"
         "<tr>"
         + "".join(
-            "<th style='text-align:left;padding:10px 14px;color:#667085;font-size:12px;'>T7D</th>"
-            "<th style='text-align:left;padding:10px 14px;color:#667085;font-size:12px;'>YTD</th>"
-            "<th style='text-align:left;padding:10px 14px;color:#667085;font-size:12px;'>Career</th>"
+            "<th style='text-align:left;padding:10px 10px;color:#667085;font-size:12px;'>T7D</th>"
+            "<th style='text-align:left;padding:10px 10px;color:#667085;font-size:12px;'>YTD</th>"
+            "<th style='text-align:left;padding:10px 10px;color:#667085;font-size:12px;'>Career</th>"
             for _ in range(len(rate_specs))
         )
         + "".join(
-            "<th style='text-align:left;padding:10px 14px;color:#667085;font-size:12px;'>T7D</th>"
-            "<th style='text-align:left;padding:10px 14px;color:#667085;font-size:12px;'>YTD Pace</th>"
-            f"<th style='text-align:left;padding:10px 14px;color:#667085;font-size:12px;'>{escape(count_career_label)}</th>"
+            "<th style='text-align:left;padding:10px 10px;color:#667085;font-size:12px;'>T7D</th>"
+            "<th style='text-align:left;padding:10px 10px;color:#667085;font-size:12px;'>YTD Pace</th>"
+            f"<th style='text-align:left;padding:10px 10px;color:#667085;font-size:12px;'>{escape(count_career_label)}</th>"
             for _ in range(len(count_specs))
         )
         + "</tr>"

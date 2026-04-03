@@ -19,6 +19,7 @@ def _format_decimal(value: float, decimals: int = 3, drop_leading_zero: bool = F
 
 def _status_colors(status: str) -> tuple[str, str]:
     color_map = {
+        "Fuego": ("#fff1f3", "#be123c"),
         "Hot": ("#ecfdf3", "#027a48"),
         "Steady": ("#eff6ff", "#175cd3"),
         "Cooling off": ("#fff7ed", "#c4320a"),

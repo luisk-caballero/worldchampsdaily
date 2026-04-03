@@ -17,6 +17,28 @@ def test_batter_status_hot() -> None:
     assert result == "Hot"
 
 
+def test_batter_status_fuego() -> None:
+    result = classify_batter_status(
+        TrendRuleInput(
+            WindowStats("T7D", {"ops": 0.930, "avg": 0.340}),
+            WindowStats("YTD", {"ops": 0.810, "avg": 0.290}),
+            WindowStats("Career", {"ops": 0.820, "avg": 0.300}),
+        )
+    )
+    assert result == "Fuego"
+
+
+def test_batter_status_steady_when_between_ytd_and_career() -> None:
+    result = classify_batter_status(
+        TrendRuleInput(
+            WindowStats("T7D", {"ops": 0.890, "avg": 0.340}),
+            WindowStats("YTD", {"ops": 0.850, "avg": 0.300}),
+            WindowStats("Career", {"ops": 0.900, "avg": 0.330}),
+        )
+    )
+    assert result == "Steady"
+
+
 def test_pitcher_status_slump() -> None:
     result = classify_pitcher_status(
         TrendRuleInput(
@@ -26,3 +48,14 @@ def test_pitcher_status_slump() -> None:
         )
     )
     assert result == "Slump"
+
+
+def test_pitcher_status_fuego() -> None:
+    result = classify_pitcher_status(
+        TrendRuleInput(
+            WindowStats("T7D", {"era": 2.70, "whip": 1.02}),
+            WindowStats("YTD", {"era": 3.80, "whip": 1.20}),
+            WindowStats("Career", {"era": 3.60, "whip": 1.18}),
+        )
+    )
+    assert result == "Fuego"

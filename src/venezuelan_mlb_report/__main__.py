@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import subprocess
+import time
 from datetime import date, datetime
 from pathlib import Path
 
@@ -12,6 +13,7 @@ from venezuelan_mlb_report.ingest import (
     write_snapshots,
 )
 from venezuelan_mlb_report.live_report import build_live_daily_report, write_live_report_html
+from venezuelan_mlb_report.mlb_api import MLBApiError
 from venezuelan_mlb_report.publish import publish_static_site
 from venezuelan_mlb_report.report import render_email_report, render_email_report_html
 from venezuelan_mlb_report.sample_data import build_sample_report
@@ -60,6 +62,52 @@ def _push_site_updates(repo_dir: Path, report_date: date, commit_message: str) -
     return True
 
 
+def _run_daily_once(
+    *,
+    report_date: date,
+    season: int,
+    tiers: tuple[str, ...],
+    live_output: Path,
+    history_output: Path,
+    history_start: int,
+    history_mode: str,
+    report_output: Path,
+    publish_site_dir: Path,
+) -> None:
+    universe = load_universe()
+    tracking_rules = load_tracking_rules()
+    selected_players = select_seed_players(universe, tiers)
+
+    live_snapshots = build_live_snapshots(selected_players, tracking_rules, season)
+    write_snapshots(live_output, live_snapshots)
+    print(f"Wrote {len(live_snapshots)} live player snapshots to {live_output}")
+
+    history_needed = history_mode == "refresh" or (
+        history_mode == "if-missing" and not history_output.exists()
+    )
+    if history_needed:
+        history_end = season - 1
+        historical_snapshots = build_historical_snapshots(selected_players, history_start, history_end)
+        write_historical_snapshots(history_output, historical_snapshots)
+        print(f"Wrote {len(historical_snapshots)} historical season snapshots to {history_output}")
+    elif history_mode == "skip" and not history_output.exists():
+        raise FileNotFoundError(f"History file not found: {history_output}")
+    else:
+        print(f"Using existing historical snapshots at {history_output}")
+
+    report = build_live_daily_report(
+        live_path=live_output,
+        historical_path=history_output,
+        as_of_date=report_date,
+        season=season,
+    )
+    write_live_report_html(report_output, report)
+    latest_path, archive_path = publish_static_site(report_output, report_date, publish_site_dir)
+    print(f"Published site latest page to {latest_path}")
+    print(f"Published site archive page to {archive_path}")
+    print(f"Wrote live HTML report to {report_output}")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Venezuelan MLB daily report tools")
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -102,6 +150,8 @@ def main() -> None:
     daily_parser.add_argument("--report-output", type=Path, default=Path("var/live_report.html"))
     daily_parser.add_argument("--publish-site-dir", type=Path, default=Path("site"))
     daily_parser.add_argument("--git-push", action="store_true")
+    daily_parser.add_argument("--max-attempts", type=int, default=3)
+    daily_parser.add_argument("--retry-delay-seconds", type=int, default=60)
     daily_parser.add_argument("--repo-dir", type=Path, default=Path("."))
     daily_parser.add_argument(
         "--commit-message",
@@ -165,39 +215,32 @@ def main() -> None:
     if args.command == "run-daily":
         report_date = datetime.strptime(args.as_of_date, "%Y-%m-%d").date() if args.as_of_date else date.today()
         season = args.season or report_date.year
+        attempts = max(1, args.max_attempts)
+        retryable_exceptions = (MLBApiError, TimeoutError)
 
-        universe = load_universe()
-        tracking_rules = load_tracking_rules()
-        selected_players = select_seed_players(universe, tuple(args.tiers))
-
-        live_snapshots = build_live_snapshots(selected_players, tracking_rules, season)
-        write_snapshots(args.live_output, live_snapshots)
-        print(f"Wrote {len(live_snapshots)} live player snapshots to {args.live_output}")
-
-        history_needed = args.history_mode == "refresh" or (
-            args.history_mode == "if-missing" and not args.history_output.exists()
-        )
-        if history_needed:
-            history_end = season - 1
-            historical_snapshots = build_historical_snapshots(selected_players, args.history_start, history_end)
-            write_historical_snapshots(args.history_output, historical_snapshots)
-            print(f"Wrote {len(historical_snapshots)} historical season snapshots to {args.history_output}")
-        elif args.history_mode == "skip" and not args.history_output.exists():
-            raise FileNotFoundError(f"History file not found: {args.history_output}")
-        else:
-            print(f"Using existing historical snapshots at {args.history_output}")
-
-        report = build_live_daily_report(
-            live_path=args.live_output,
-            historical_path=args.history_output,
-            as_of_date=report_date,
-            season=season,
-        )
-        write_live_report_html(args.report_output, report)
-        latest_path, archive_path = publish_static_site(args.report_output, report_date, args.publish_site_dir)
-        print(f"Published site latest page to {latest_path}")
-        print(f"Published site archive page to {archive_path}")
-        print(f"Wrote live HTML report to {args.report_output}")
+        for attempt in range(1, attempts + 1):
+            try:
+                _run_daily_once(
+                    report_date=report_date,
+                    season=season,
+                    tiers=tuple(args.tiers),
+                    live_output=args.live_output,
+                    history_output=args.history_output,
+                    history_start=args.history_start,
+                    history_mode=args.history_mode,
+                    report_output=args.report_output,
+                    publish_site_dir=args.publish_site_dir,
+                )
+                break
+            except retryable_exceptions as exc:
+                if attempt >= attempts:
+                    raise
+                delay_seconds = max(1, args.retry_delay_seconds) * attempt
+                print(
+                    f"Run attempt {attempt}/{attempts} failed with retryable error: {exc}. "
+                    f"Retrying in {delay_seconds} seconds..."
+                )
+                time.sleep(delay_seconds)
 
         if args.git_push:
             pushed = _push_site_updates(args.repo_dir.resolve(), report_date, args.commit_message)

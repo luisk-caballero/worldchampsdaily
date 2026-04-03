@@ -4,59 +4,60 @@ This document tracks near-term improvements to the Venezuelan MLB daily report a
 
 ## Current priorities
 
-### 1. Pipeline resilience
+### 1. Additional mobile width optimization (player column)
 
 Status: next up
 
 Goal:
-- Make the daily run more reliable when MLB or network calls fail temporarily.
+- Keep the sticky player column, but reclaim a bit more width for numeric columns on phones.
 
 Current problem:
-- The April 2 scheduled run failed before the site rebuild because of a transient DNS / `URLError` during the first MLB API lookup.
+- The new sticky player column works well, but still consumes more space than ideal on narrower phone screens.
 
 Planned work:
-- Add retries with backoff around MLB API calls
-- Add better logging around which request failed
-- Consider a fallback mode that preserves the last successful site output when a fresh pull fails
+- Trim player cell width and spacing further while keeping names readable
+- Test that name + full "Last Night" stat line remain easy to scan in one horizontal pass
+- Keep sticky behavior in both last-night and snapshot tables
 
 Success looks like:
-- A short-lived network issue does not cause the entire morning publish to fail
+- Better number visibility on mobile without losing player context
 
-### 2. Mobile-friendly report layout
+### 2. Seed list revision (add newly identified player)
 
-Status: queued
+Status: next up
 
 Goal:
-- Make the report easier to use on phone screens.
+- Keep the tracked universe current when a new Venezuelan MLB player appears.
 
 Current problem:
-- The snapshot tables are wide, and horizontal scrolling is awkward on mobile.
+- One new player needs to be added to the seed and tracking flow.
 
 Planned work:
-- Explore freezing the player column while allowing horizontal scroll on the stat columns
-- Review whether this should apply only to the hosted web version and not the email version
-- Tighten spacing and column widths where possible
+- Add the player to the universe seed file
+- Assign role/subrole and initial tracking tier
+- Re-run live pull and validate they appear correctly in the report pipeline
 
 Success looks like:
-- Player identity stays visible while scrolling across the stat groups on mobile
+- The new player is present in snapshots and eligible for report inclusion by rules
 
 ### 3. Notes coverage and note quality
 
-Status: queued
+Status: done (locked for current strategy)
 
 Goal:
 - Improve the `Last Night` note column so it shows more useful linked notes without adding noise.
 
 Current problem:
-- The current matching logic is too strict and often produces no notes.
+- Notes are intentionally conservative by design and may be blank for non-headline performances.
 
 Planned work:
-- Revisit the source allowlist and matching thresholds
-- Improve game-level matching for `MLB.com` and allowed national outlets
-- Keep notes selective, linked, and short
+- Keep current approach:
+- `MLB.com`: headline + blurb only
+- Other outlets: equivalent short metadata only (headline + short description)
+- No full-article parsing
 
 Success looks like:
-- More players who appeared last night get relevant linked notes, with low false-positive noise
+- Notes stay high-signal and worth clicking, even if coverage volume is lower
 
 ### 4. Status label tuning
 
@@ -75,6 +76,33 @@ Planned work:
 
 Success looks like:
 - The labels feel credible on a quick read and match our baseball instincts more often
+
+### 5. Pipeline resilience hardening (follow-up)
+
+Status: partially done
+
+Goal:
+- Keep daily runs robust under transient MLB/network instability.
+
+Current problem:
+- Retries are now in place, but we still need stronger fallback behavior if an entire run fails.
+
+Done:
+- Added retries with backoff and timeouts for MLB API pulls
+- Added retry handling for external note RSS requests
+
+Planned work:
+- Add fallback mode to keep last successful publish when live pull fails
+- Improve failure visibility in automation output with clearer per-step diagnostics
+
+Success looks like:
+- Transient outages are absorbed; hard failures still preserve a usable published report
+
+## Completed recently
+
+- Mobile-first sticky player column implemented for horizontal table scrolling
+- Narrower last-night table columns (`Opp`, tighter padding, reduced min widths)
+- Daily pipeline retries added for API and note-source calls
 
 ## Parking lot
 

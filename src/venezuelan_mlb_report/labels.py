@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from statistics import mean
 
 from venezuelan_mlb_report.models import WindowStats
 
@@ -30,28 +29,29 @@ def classify_batter_status(data: TrendRuleInput) -> str:
     ytd_avg = data.ytd.metrics.get("avg", 0.0)
     career_avg = data.baseline.metrics.get("avg", 0.0)
 
-    pace_signal = mean(
-        [
-            _relative_delta(t7_ops, ytd_ops, higher_is_better=True),
-            _relative_delta(t7_avg, ytd_avg, higher_is_better=True),
-        ]
-    )
-    quality_signal = mean(
-        [
-            _relative_delta(t7_ops, career_ops, higher_is_better=True),
-            _relative_delta(t7_avg, career_avg, higher_is_better=True),
-        ]
-    )
+    pace_deltas = [
+        _relative_delta(t7_ops, ytd_ops, higher_is_better=True),
+        _relative_delta(t7_avg, ytd_avg, higher_is_better=True),
+    ]
+    quality_deltas = [
+        _relative_delta(t7_ops, career_ops, higher_is_better=True),
+        _relative_delta(t7_avg, career_avg, higher_is_better=True),
+    ]
 
-    if pace_signal >= STEADY_BAND and quality_signal >= STEADY_BAND:
+    pace_pos = any(delta >= STEADY_BAND for delta in pace_deltas)
+    pace_neg = any(delta <= -STEADY_BAND for delta in pace_deltas)
+    quality_pos = any(delta >= STEADY_BAND for delta in quality_deltas)
+    quality_neg = any(delta <= -STEADY_BAND for delta in quality_deltas)
+
+    if pace_pos and quality_pos:
         return "Fuego"
-    if pace_signal <= -STEADY_BAND and quality_signal <= -STEADY_BAND:
+    if pace_neg and quality_neg:
         return "Slump"
-    if abs(pace_signal) <= STEADY_BAND and abs(quality_signal) <= STEADY_BAND:
+    if all(abs(delta) <= STEADY_BAND for delta in pace_deltas + quality_deltas):
         return "Steady"
-    if pace_signal >= STEADY_BAND or quality_signal >= STEADY_BAND:
+    if pace_pos or quality_pos:
         return "Hot"
-    if pace_signal <= -STEADY_BAND or quality_signal <= -STEADY_BAND:
+    if pace_neg or quality_neg:
         return "Cooling off"
     return "Steady"
 
@@ -64,27 +64,28 @@ def classify_pitcher_status(data: TrendRuleInput) -> str:
     ytd_whip = data.ytd.metrics.get("whip", 99.0)
     career_whip = data.baseline.metrics.get("whip", 99.0)
 
-    pace_signal = mean(
-        [
-            _relative_delta(t7_era, ytd_era, higher_is_better=False),
-            _relative_delta(t7_whip, ytd_whip, higher_is_better=False),
-        ]
-    )
-    quality_signal = mean(
-        [
-            _relative_delta(t7_era, career_era, higher_is_better=False),
-            _relative_delta(t7_whip, career_whip, higher_is_better=False),
-        ]
-    )
+    pace_deltas = [
+        _relative_delta(t7_era, ytd_era, higher_is_better=False),
+        _relative_delta(t7_whip, ytd_whip, higher_is_better=False),
+    ]
+    quality_deltas = [
+        _relative_delta(t7_era, career_era, higher_is_better=False),
+        _relative_delta(t7_whip, career_whip, higher_is_better=False),
+    ]
 
-    if pace_signal >= STEADY_BAND and quality_signal >= STEADY_BAND:
+    pace_pos = any(delta >= STEADY_BAND for delta in pace_deltas)
+    pace_neg = any(delta <= -STEADY_BAND for delta in pace_deltas)
+    quality_pos = any(delta >= STEADY_BAND for delta in quality_deltas)
+    quality_neg = any(delta <= -STEADY_BAND for delta in quality_deltas)
+
+    if pace_pos and quality_pos:
         return "Fuego"
-    if pace_signal <= -STEADY_BAND and quality_signal <= -STEADY_BAND:
+    if pace_neg and quality_neg:
         return "Slump"
-    if abs(pace_signal) <= STEADY_BAND and abs(quality_signal) <= STEADY_BAND:
+    if all(abs(delta) <= STEADY_BAND for delta in pace_deltas + quality_deltas):
         return "Steady"
-    if pace_signal > STEADY_BAND or quality_signal > STEADY_BAND:
+    if pace_pos or quality_pos:
         return "Hot"
-    if pace_signal < -STEADY_BAND or quality_signal < -STEADY_BAND:
+    if pace_neg or quality_neg:
         return "Cooling off"
     return "Steady"

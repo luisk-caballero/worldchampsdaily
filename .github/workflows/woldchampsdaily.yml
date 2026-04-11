@@ -1,0 +1,50 @@
+name: WoldChampsDaily
+
+on:
+  workflow_dispatch:
+  schedule:
+    # ET windows during DST (UTC-4): 11:30 PM, 12:50 AM, 6:00 AM ET
+    - cron: "30 3 * * *"
+    - cron: "50 4 * * *"
+    - cron: "0 10 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  run-report:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Compute ET Date
+        run: echo "AS_OF_DATE=$(TZ=America/New_York date +%F)" >> "$GITHUB_ENV"
+
+      - name: Run Daily Pipeline
+        run: |
+          PYTHONPATH=src python3 -m venezuelan_mlb_report run-daily \
+            --as-of-date "$AS_OF_DATE" \
+            --history-mode if-missing \
+            --publish-site-dir site \
+            --max-attempts 4 \
+            --retry-delay-seconds 90
+
+      - name: Commit And Push Site Changes
+        run: |
+          if git diff --quiet -- site; then
+            echo "No site changes to commit."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add site
+          git commit -m "Update daily report for ${AS_OF_DATE}"
+          git push
+

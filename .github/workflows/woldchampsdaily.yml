@@ -11,12 +11,19 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: woldchampsdaily
+  cancel-in-progress: false
+
 jobs:
   run-report:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -44,7 +51,8 @@ jobs:
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout main
+          git pull --rebase origin main
           git add site
           git commit -m "Update daily report for ${AS_OF_DATE}"
-          git push
-
+          git push origin HEAD:main

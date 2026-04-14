@@ -6,13 +6,21 @@ from dataclasses import dataclass
 from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.parse import quote
-from urllib.request import urlopen
+from urllib.request import Request, urlopen
 
 
 BASE_URL = "https://statsapi.mlb.com/api/v1"
 DEFAULT_TIMEOUT_SECONDS = 15
 DEFAULT_RETRIES = 3
 RETRYABLE_HTTP_STATUSES = {429, 500, 502, 503, 504}
+DEFAULT_HEADERS = {
+    "User-Agent": (
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/124.0.0.0 Safari/537.36"
+    ),
+    "Accept": "application/json,text/plain,*/*",
+}
 
 
 class MLBApiError(RuntimeError):
@@ -34,7 +42,8 @@ def _read_url(url: str, *, timeout: int = DEFAULT_TIMEOUT_SECONDS, retries: int 
     last_error: Exception | None = None
     for attempt in range(1, retries + 1):
         try:
-            with urlopen(url, timeout=timeout) as response:
+            request = Request(url, headers=DEFAULT_HEADERS)
+            with urlopen(request, timeout=timeout) as response:
                 return response.read()
         except HTTPError as exc:
             last_error = exc

@@ -207,6 +207,69 @@
     "must_track": false
   },
   {
+    "name": "Jorbit Vivas",
+    "team": "NYY",
+    "role": "batter",
+    "subrole": null,
+    "groups": [],
+    "tracking_tier": "active",
+    "must_track": false
+  },
+  {
+    "name": "Jose Fernandez",
+    "team": "AZ",
+    "role": "batter",
+    "subrole": null,
+    "groups": [],
+    "tracking_tier": "active",
+    "must_track": false
+  },
+  {
+    "name": "Jorge Barrosa",
+    "team": "AZ",
+    "role": "batter",
+    "subrole": null,
+    "groups": [],
+    "tracking_tier": "active",
+    "must_track": false
+  },
+  {
+    "name": "Luis Rengifo",
+    "team": "LAA",
+    "role": "batter",
+    "subrole": null,
+    "groups": [],
+    "tracking_tier": "active",
+    "must_track": false
+  },
+  {
+    "name": "Carlos Narvaez",
+    "team": "NYY",
+    "role": "batter",
+    "subrole": null,
+    "groups": [],
+    "tracking_tier": "active",
+    "must_track": false
+  },
+  {
+    "name": "Freddy Fermin",
+    "team": "KC",
+    "role": "batter",
+    "subrole": null,
+    "groups": [],
+    "tracking_tier": "active",
+    "must_track": false
+  },
+  {
+    "name": "Miguel Rojas",
+    "team": "LAD",
+    "role": "batter",
+    "subrole": null,
+    "groups": [],
+    "tracking_tier": "active",
+    "must_track": false
+  },
+  {
     "name": "Ildemaro Vargas",
     "team": null,
     "role": "batter",

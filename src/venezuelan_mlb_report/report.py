@@ -7,7 +7,8 @@ from pathlib import Path
 from venezuelan_mlb_report.models import DailyReport, PlayerSnapshot
 
 
-HEADER_V_PATH = Path("/Users/lcaballer1/Documents/venezuelan-mlb-report/assets/header-marks/venezuela-v.svg")
+REPO_ROOT = Path(__file__).resolve().parents[2]
+HEADER_V_PATH = REPO_ROOT / "assets" / "header-marks" / "venezuela-v.svg"
 
 
 def _format_decimal(value: float, decimals: int = 3, drop_leading_zero: bool = False) -> str:
@@ -29,7 +30,10 @@ def _status_colors(status: str) -> tuple[str, str]:
 
 
 def _header_v_markup() -> str:
-    return HEADER_V_PATH.read_text(encoding="utf-8")
+    if HEADER_V_PATH.exists():
+        return HEADER_V_PATH.read_text(encoding="utf-8")
+    # Fallback for non-local environments where the asset path is unavailable.
+    return "<div style='font-size:44px;line-height:44px;color:#8b1e2d;font-weight:800;'>V</div>"
 
 
 def _player_cell_html(snapshot: PlayerSnapshot) -> str:

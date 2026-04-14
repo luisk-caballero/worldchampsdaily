@@ -7,7 +7,7 @@ from pathlib import Path
 from urllib.parse import quote
 
 from venezuelan_mlb_report.labels import TrendRuleInput, classify_batter_status, classify_pitcher_status
-from venezuelan_mlb_report.mlb_api import _read_url, fetch_game_content, fetch_game_logs
+from venezuelan_mlb_report.mlb_api import MLBApiError, _read_url, fetch_game_content, fetch_game_logs
 from venezuelan_mlb_report.models import DailyReport, LastNightLine, Player, PlayerSnapshot, WindowStats
 from venezuelan_mlb_report.report import render_email_report_html
 
@@ -379,7 +379,12 @@ def build_live_daily_report(
     for row in live_rows:
         if not row["selected_for_daily_report"] or row["mlb_id"] is None:
             continue
-        logs = fetch_game_logs(row["mlb_id"], row["role"], season)
+        try:
+            logs = fetch_game_logs(row["mlb_id"], row["role"], season)
+        except MLBApiError as exc:
+            # Keep report generation resilient when individual player log fetches fail.
+            print(f"Warning: skipping game logs for {row['seed_name']} ({row['mlb_id']}): {exc}")
+            logs = []
         prior_logs = [log for log in logs if _parse_date(log["date"]) == prior_date]
         last_night = None
         if prior_logs:
@@ -388,7 +393,11 @@ def build_live_daily_report(
             note_text = ""
             note_url = None
             if game_pk:
-                note_text, note_url = _build_mlb_note(game_pk, row["seed_name"], note_cache)
+                try:
+                    note_text, note_url = _build_mlb_note(game_pk, row["seed_name"], note_cache)
+                except MLBApiError as exc:
+                    print(f"Warning: note lookup failed for game {game_pk} ({row['seed_name']}): {exc}")
+                    note_text, note_url = "", None
             if not note_text:
                 note_text, note_url = _search_external_note(
                     row["seed_name"],

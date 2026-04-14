@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import time
+import unicodedata
 from dataclasses import dataclass
 from typing import Any
 from urllib.error import HTTPError, URLError
@@ -61,13 +62,30 @@ def _get_json(url: str) -> dict[str, Any]:
     return json.loads(_read_url(url).decode("utf-8"))
 
 
+def _normalize_name(value: str) -> str:
+    normalized = unicodedata.normalize("NFKD", value)
+    ascii_only = "".join(ch for ch in normalized if not unicodedata.combining(ch))
+    return " ".join(ascii_only.lower().strip().split())
+
+
 def search_person_by_name(name: str) -> ResolvedPlayer | None:
     url = f"{BASE_URL}/people/search?names={quote(name)}"
     payload = _get_json(url)
     people = payload.get("people", [])
     if not people:
         return None
-    person = people[0]
+    wanted = _normalize_name(name)
+
+    def _score(person: dict[str, Any]) -> tuple[int, int, int, int]:
+        birth_country = (person.get("birthCountry") or "").strip().lower()
+        full_name = _normalize_name(person.get("fullName") or "")
+        exact_name = 1 if full_name == wanted else 0
+        venezuelan = 1 if birth_country == "venezuela" else 0
+        active = 1 if bool(person.get("active", False)) else 0
+        has_debut = 1 if bool(person.get("mlbDebutDate")) else 0
+        return (venezuelan, exact_name, active, has_debut)
+
+    person = max(people, key=_score)
     return ResolvedPlayer(
         mlb_id=int(person["id"]),
         full_name=person["fullName"],

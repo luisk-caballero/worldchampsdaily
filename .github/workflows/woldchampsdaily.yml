@@ -20,27 +20,37 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           ref: main
           fetch-depth: 0
 
       - name: Setup Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.11"
 
       - name: Compute ET Date
-        run: echo "AS_OF_DATE=$(TZ=America/New_York date +%F)" >> "$GITHUB_ENV"
-
-      - name: Run Daily Pipeline
         run: |
-          PYTHONPATH=src python3 -m venezuelan_mlb_report run-daily \
+          echo "AS_OF_DATE=$(TZ=America/New_York date +%F)" >> "$GITHUB_ENV"
+          echo "SEASON=$(TZ=America/New_York date +%Y)" >> "$GITHUB_ENV"
+
+      - name: Pull Live Stats
+        run: |
+          PYTHONPATH=src python3 -m venezuelan_mlb_report pull-live \
+            --season "$SEASON" \
+            --tiers core active \
+            --output var/live_player_stats.json
+
+      - name: Build And Publish Report
+        run: |
+          PYTHONPATH=src python3 -m venezuelan_mlb_report build-live-report \
+            --season "$SEASON" \
             --as-of-date "$AS_OF_DATE" \
-            --history-mode if-missing \
-            --publish-site-dir site \
-            --max-attempts 4 \
-            --retry-delay-seconds 90
+            --live-input var/live_player_stats.json \
+            --history-input data/historical_player_stats_full.json \
+            --output var/live_report.html \
+            --publish-site-dir site
 
       - name: Commit And Push Site Changes
         run: |
